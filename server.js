@@ -53,6 +53,10 @@ passport.deserializeUser((user, done) => {
 app.use(express.json());
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Auth routes
 app.get('/auth/google', 
   passport.authenticate('google', { 
@@ -395,5 +399,4 @@ app.post('/api/gmail/apply-action', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`\n✅ Internship Agent running at http://localhost:${PORT}\n`));
+module.exports = app;
